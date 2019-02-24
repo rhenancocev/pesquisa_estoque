@@ -1,17 +1,22 @@
 var oracledb = require('oracledb');
-var dbConfig = require('../banco/dbconfig.js');
-var sqlutil = require('../banco/sqlutil.js');
-var query = require('../tools/query');
-const moment = require('moment');
+var dbConfig = require('./dbconfig.js');
+var sqlutil = require('./sqlutil.js');
+
 
 module.exports = {
 
 
-  lucratividade_pedido: function (ctx, bot, param) {
+  estoque_total: function (ctx, bot) {
 
-    var sql_query = query.queryLucratividade(param);
+    var sql_query = `select pp.no_produto as NOME,
+                            p.id_modelo_produto as MODELO,
+                            p.quantidade_disponivel as QUANTIDADE  
+                     from T_ESTOQUE_PRODUTO p,
+                          t_produto pp
+                     where pp.id_modelo = p.id_modelo_produto
+                     order by 1`;
 
-    sqlutil.executar_sql_o44prdg(sql_query, ctx, bot, this);
+    sqlutil.executar_sql(sql_query, ctx, bot, this);
 
   },
 
@@ -22,18 +27,19 @@ module.exports = {
 
       function (err, rows) {
         var retorno = "";
-        var retornoPedido = "";
-        var retornoLucratividade = "";
-        var retornoNivel = "";
-        var retornoCiclo = "";
+        var retornoModelo = "";
+        var retornoQuantidade = ""
+        var retornoNome = "";
 
         if (err) {
           console.error(err);
           doClose(connection, resultSet);   // always close the ResultSet
         } else if (rows.length <= 0){
+          
+
           console.log("fetchRowsFromRS(): Got " + rows.length + " rows");
           
-          retorno += "O pedido está cancelado/Em andamento ou não existe no nosso banco de dados"
+          retorno += "Falar com o Rhenan, o banco não retornou linhas"
           bot.sendMessage(ctx.chat.id, "" + retorno);
         } 
         else if (rows.length > 0) {
@@ -41,18 +47,13 @@ module.exports = {
 
           
           for (var i = 0; i < rows.length; i++) {
-            retornoLucratividade += rows[i].LUCRATIVIDADE;
-            retornoPedido += rows[i].PEDIDO;
-            retornoNivel += rows[i].NIVEL_PEDIDO_FINALIZADO;
-            retornoCiclo += rows[i].CICLO;
+            retornoModelo += rows[i].NOME + " - " + rows[i].MODELO + " - " + rows[i].QUANTIDADE + "\n";
+            //retornoQuantidade += rows[i].QUANTIDADE;
 
           }
 
           console.log('Numero do Pedido: ' + retorno);
-          bot.sendMessage(ctx.chat.id, "Pedido: " + "<b>" + retornoPedido + "</b>"
-                                     + "\n\nCiclo do pedido: " + "<b>" + retornoCiclo + "</b>"
-                                     + "\n\nLucratividade: " + "<b>" + retornoLucratividade + "</b>"
-                                     + "\n\nNivel do pedido: " + "<b>" + retornoNivel + "</b>", { parse_mode: "HTML" });
+          bot.sendMessage(ctx.chat.id, "ESTOQUE TOTAL: \n" + "<b>" + retornoModelo + "</b>", { parse_mode: "HTML" });
 
           if (rows.length === numRows)      // might be more rows
             fetchRowsFromRS(connection, resultSet, numRows);
