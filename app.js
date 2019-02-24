@@ -15,9 +15,9 @@ bot.onText(/\/estoque_total/, (ctx, match) => {
 
 bot.on ('text', (ctx) => {
     const chatId = ctx.chat.id;
-
     texto = ctx.text;
     nome = ctx.from.first_name;
+    
     var comando = texto;
 
     if (comando === '/start'){

@@ -27,9 +27,6 @@ module.exports = {
 
       function (err, rows) {
         var retorno = "";
-        var retornoModelo = "";
-        var retornoQuantidade = ""
-        var retornoNome = "";
 
         if (err) {
           console.error(err);
@@ -47,13 +44,11 @@ module.exports = {
 
           
           for (var i = 0; i < rows.length; i++) {
-            retornoModelo += rows[i].NOME + " - " + rows[i].MODELO + " - " + rows[i].QUANTIDADE + "\n";
-            //retornoQuantidade += rows[i].QUANTIDADE;
+            retorno += rows[i].NOME + " - " + rows[i].MODELO + " - " + rows[i].QUANTIDADE + "\n";
 
           }
 
-          console.log('Numero do Pedido: ' + retorno);
-          bot.sendMessage(ctx.chat.id, "ESTOQUE TOTAL: \n" + "<b>" + retornoModelo + "</b>", { parse_mode: "HTML" });
+          bot.sendMessage(ctx.chat.id, "ESTOQUE TOTAL: \n" + "<b>" + retorno + "</b>", { parse_mode: "HTML" });
 
           if (rows.length === numRows)      // might be more rows
             fetchRowsFromRS(connection, resultSet, numRows);
