@@ -1,5 +1,5 @@
 var oracledb = require('oracledb');
-var dbConfig = require('./dbconfig.js');
+var dbConfig = require('./dbconfig');
 
 //Number of rows to return from each call to getRows()
 var numRows = 100;

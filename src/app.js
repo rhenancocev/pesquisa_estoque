@@ -1,6 +1,6 @@
 
 var estoqueTotal = require ('./estoqueTotal');
-const env = require('./.env');
+const env = require('../Autenticacao/.env');
 
 const TelegramBot = require('node-telegram-bot-api');
 // replace the value below with the Telegram token you receive from @BotFather
@@ -15,10 +15,11 @@ bot.onText(/\/estoque_total/, (ctx, match) => {
 
 bot.on ('text', (ctx) => {
     const chatId = ctx.chat.id;
-    texto = ctx.text;
+    texto = ctx.text.split(" ");
     nome = ctx.from.first_name;
-    
-    var comando = texto;
+    console.log('ctx', ctx);
+
+    var comando = texto[0];
 
     if (comando === '/start'){
         bot.sendMessage(chatId, nome + ", você é gay");

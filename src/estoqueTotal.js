@@ -1,6 +1,6 @@
 var oracledb = require('oracledb');
-var dbConfig = require('./dbconfig.js');
-var sqlutil = require('./sqlutil.js');
+var dbConfig = require('../Banco/dbconfig');
+var sqlutil = require('../Banco/sqlutil');
 
 
 module.exports = {
