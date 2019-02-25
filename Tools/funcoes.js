@@ -24,7 +24,7 @@ module.exports = {
         const chatId = ctx.chat.id;
         const nome = ctx.from.first_name;
         bot.sendMessage(chatId, nome + ", eu não sou autorizado a te responder." 
-        + "\nQualquer dúvida, acionar o <b>Rhenan Cocev</b> da SysMap", { parse_mode: "HTML" });
+        + "\nQualquer dúvida, acionar o <b>Rhenan</b>", { parse_mode: "HTML" });
     }
 
 }
