@@ -12,38 +12,34 @@ const TelegramBot = require('node-telegram-bot-api');
 const bot = new TelegramBot(env.token, { polling: true });
 var pessoasAutorizadas = acesso.pessoasAutorizadas;
 
-
-bot.onText(/\/estoque_total/, (ctx, match) => {
-    const chatId = ctx.chat.id;
-    var autorizado = funcoes.autorizacao(pessoasAutorizadas, chatId);
-    if(autorizado){
-        estoqueTotal.estoque_total(ctx, bot);
-    }else{
-        funcoes.autorizacaoNegada(ctx);
-    }
-    
-});
-
-
-bot.onText(/\/est/, (ctx, match) => {
+bot.onText(/\/estoque/, (ctx, match) => {
     const chatId = ctx.chat.id;
     var texto = ctx.text;
-    var estoqueProduto = texto.substring(5);
+    var estoqueProduto = texto.substring(9);
     var autorizado = funcoes.autorizacao(pessoasAutorizadas, chatId);
-    const x = '/est';
+    const x = '/estoque';
     const y = 'Modelo do Produto';
 
     if (estoqueProduto === ''){
         enviaMensagem.enviarRespostaCasoVazia(ctx, x, y);
-    }else if (autorizado){
+    } if (autorizado){
         estoque.est(ctx, bot, estoqueProduto);
     }else{
         funcoes.autorizacaoNegada(ctx);
+        
     }
+});
 
-    
+bot.onText(/\/Estoque_total/, (ctx, match) => {
+    const chatId = ctx.chat.id;
+    var autorizado = funcoes.autorizacao(pessoasAutorizadas, chatId);
 
-
+    if (autorizado){
+        estoqueTotal.estoqueTodos(ctx,bot);
+    }else{
+        funcoes.autorizacaoNegada(ctx);
+        
+    }
 });
 
 bot.on('text', (ctx) => {
@@ -56,9 +52,9 @@ bot.on('text', (ctx) => {
     if (comando === '/start'){
         enviaMensagem.enviarBoasVindas(ctx);
 
-    }else if(comando === '/estoque_total'){
+    }else if(comando === '/Estoque_total'){
 
-    }else if (comando === '/est'){
+    }else if (comando === '/estoque'){
 
     }else if(comando === '/help'){
         enviaMensagem.help(ctx);    

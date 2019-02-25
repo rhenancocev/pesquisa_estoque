@@ -37,7 +37,7 @@ module.exports = {
           console.log("fetchRowsFromRS(): Got " + rows.length + " rows");
           
           retornoEst += "Falar com o Rhenan, o banco não retornou linhas"
-          //bot.sendMessage(ctx.chat.id, "" + retorno);
+          bot.sendMessage(ctx.chat.id, "" + retornoEst);
         } 
         else if (rows.length > 0) {
           console.log("fetchRowsFromRS(): Got " + rows.length + " rows");

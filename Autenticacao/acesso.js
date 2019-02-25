@@ -5,7 +5,7 @@ const TelegramBot = require('node-telegram-bot-api');
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(env.token, { polling: false });
 
-var pessoasAutorizadas = [621550962];
+var pessoasAutorizadas = [];
 
 module.exports = {
     pessoasAutorizadas
