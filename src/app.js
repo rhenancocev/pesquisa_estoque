@@ -1,6 +1,7 @@
 var estoqueTotal = require ('./estoqueTotal');
 var estoque = require('./estoque');
 const enviaMensagem = require('../Tools/enviarMensagens');
+const funcoes = require('../Tools/funcoes');
 const env = require('../Autenticacao/.env');
 
 const TelegramBot = require('node-telegram-bot-api');
@@ -19,8 +20,16 @@ bot.onText(/\/est/, (ctx, match) => {
     const chatId = ctx.chat.id;
     var texto = ctx.text;
     var estoqueProduto = texto.substring(5);
+    const x = '/est';
+    const y = 'Modelo do Produto';
 
-    estoque.est(ctx, bot, estoqueProduto);
+    if (estoqueProduto === ''){
+        enviaMensagem.enviarRespostaCasoVazia(ctx, x, y);
+    }else{
+        estoque.est(ctx, bot, estoqueProduto);
+    }
+
+    
 
 
 });

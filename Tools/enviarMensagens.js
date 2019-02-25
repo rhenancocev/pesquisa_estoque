@@ -26,22 +26,6 @@ module.exports = {
                         + "\n" + "-> " + "/est <code>modelo do produto</code>" + "\n Exemplo: /est <code>IWP-001</code>", {parse_mode: "HTML"});
     },
 
-        enviarComandos: function(ctx){
-        const chatId = ctx.chat.id;
-        const nome = ctx.from.first_name;
-        bot.sendMessage(chatId, 'ChatId: ' + '<code>' + chatId + '</code>' + '\n\n' + nome + ', os comandos disponiveis são:'
-            + '\n\n-> ' + "/boleto <code>numero do pedido</code>"  + '\n Exemplo: /boleto <code>123456789</code>'
-            + '\n\n' + '-> ' + "/pk <code>código da consultora</code>" + '\n Exemplo: /pk <code>123456789</code>'
-            + '\n\n' + '-> ' + "/cartao <code>numero do pedido</code>" + '\n Exemplo: /cartao <code>123456789</code>'
-            + '\n\n' + '-> ' + "/status <code>numero do pedido</code>" + '\n Exemplo: /status <code>123456789</code>'
-            + '\n\n' + '-> ' + "/lucra <code>numero do pedido</code>" + '\n Exemplo: /lucra <code>123456789</code>'
-            + '\n\n' + '-> ' + "/pts <code>código da consultora</code>" + '\n Exemplo: /pts <code>123456789</code>'
-            + '\n\n\n' + "Comandos para extração de gráficos: "
-            + '\n\n' + '-> ' + '/pedidos_dia - Pedidos finalizados por dia'        
-            + '\n\n' + '-> ' + '/pedidos_minuto - Pedidos finalizados por minuto'
-            + '\n\n' + '-> ' + '/pedidos_hora - Pedidos finalizados por hora', {parse_mode: "HTML"});
-        },
-
         enviarRespostaCasoVazia: function(ctx, x, y){
         const chatId = ctx.chat.id;
         const nome = ctx.from.first_name;
