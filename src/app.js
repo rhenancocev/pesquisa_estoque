@@ -20,6 +20,11 @@ bot.onText(/\/estoque/, (ctx, match) => {
     const x = '/estoque';
     const y = 'Modelo do Produto';
 
+    var teste = ctx.text.split(" ");
+    var a = teste [0];
+    var b = teste [2];
+    console.log("rhenan: " + a+b);
+
     if (estoqueProduto === ''){
         enviaMensagem.enviarRespostaCasoVazia(ctx, x, y);
     } if (autorizado){
